@@ -1,4 +1,4 @@
-name: Spring PetClinic CI/CD
+name: PetClinic CICD
 
 on:
   workflow_dispatch:
@@ -35,7 +35,7 @@ jobs:
 
       - name: Build Tag and push Docker Image
         env:
-          IMAGE_NAME: seem2feel.jfrog.io/pet-docker/jfrog-docker-example-image:${{ github.run_number }}
+          IMAGE_NAME: seem2feel.jfrog.io/pet-docker/petclinic-image:${{ github.run_number }}
         run: |
           jf docker build -t $IMAGE_NAME .
           jf docker push $IMAGE_NAME
@@ -43,7 +43,7 @@ jobs:
       - name: Publish Build info With JFrog CLI
         env:
           # Generated and maintained by GitHub
-          JFROG_CLI_BUILD_NAME: jfrog-docker-build-example
+          JFROG_CLI_BUILD_NAME: petclinic
           # JFrog organization secret
           JFROG_CLI_BUILD_NUMBER : ${{ github.run_number }}
         run: |
